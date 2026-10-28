@@ -9,21 +9,13 @@
 //
 // Build: typst compile final.typ
 
-// ---------------------------------------------------------------------------
-// Document details: fill these in.
-// ---------------------------------------------------------------------------
-
-#let project-title = [Project Title]
-#let client-name = [Client Name]
-#let author-name = [Your Name or Consultancy Name]
-#let report-date = datetime.today().display("[month repr:long] [day], [year]")
+// Document details (title, client, author, date) and todo() live in
+// details.typ, shared with proposal.typ.
+#import "details.typ": *
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-// Highlighted placeholder text; search for "todo(" before submitting.
-#let todo(body) = highlight(fill: yellow.lighten(60%))[#body]
 
 // Shaded box for key takeaways a busy decision-maker should not miss.
 #let callout(title: none, body) = block(
@@ -76,6 +68,7 @@
 #show heading: set text(size: 12pt, weight: "bold")
 #show heading: set block(above: 1.5em, below: 1em)
 #show heading.where(level: 1): set text(size: 14pt)
+#show: style-links
 
 // Single-space figure contents and captions; table captions go above tables.
 #show figure: set par(leading: 0.65em, first-line-indent: 0pt)
@@ -97,7 +90,8 @@
 
     #v(2em)
     Prepared for \
-    #text(size: 14pt, client-name)
+    #text(size: 14pt, client-name) \
+    #client-title
 
     #v(2em)
     Prepared by \
@@ -261,8 +255,7 @@
 // ---------------------------------------------------------------------------
 
 #pagebreak()
-#set par(first-line-indent: 0pt, hanging-indent: 0.5in)
-#bibliography("final.bib", title: "References", style: "apa", full: true)
+#references()
 
 // ---------------------------------------------------------------------------
 // 7. Technical Appendix (not counted toward length)
